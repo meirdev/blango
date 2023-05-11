@@ -25,6 +25,9 @@ class Comment(models.Model):
 
 
 class Tag(models.Model):
+    class Meta:
+        ordering = ["value"]
+
     value = models.TextField(max_length=100, unique=True)
 
     def __str__(self):
@@ -32,6 +35,9 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
+    class Meta:
+        ordering = ["-id"]
+
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     modified_at = models.DateTimeField(auto_now=True)
